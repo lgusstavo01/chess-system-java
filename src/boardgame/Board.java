@@ -3,10 +3,10 @@ package boardgame;
 public class Board {
 	private Integer rows;
 	private Integer columns;
-	
-	/*Declaro que o tabuleiro vai receber uma matriz de peças*/
+
+	/* Declaro que o tabuleiro vai receber uma matriz de peças */
 	private Piece[][] pieces;
-	
+
 	public Board(Integer rows, Integer columns) {
 		this.rows = rows;
 		this.columns = columns;
@@ -27,5 +27,21 @@ public class Board {
 
 	public void setColumns(Integer columns) {
 		this.columns = columns;
-	}	
+	}
+
+	/*
+	 * Aqui eu retorno a peça que está em determinada posição, informando a linha e
+	 * a coluna
+	 */
+	public Piece piece(int row, int column) {
+		return pieces[row][column];
+	}
+
+	/*
+	 * Aqui eu retorno a peça que está em determinada posicção, informando uma
+	 * posição específica
+	 */
+	public Piece piece(Position position) {
+		return pieces[position.getRow()][position.getColumn()];
+	}
 }

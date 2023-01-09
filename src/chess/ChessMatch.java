@@ -1,0 +1,32 @@
+package chess;
+
+import boardgame.Board;
+
+public class ChessMatch {
+
+	/* Uma partida de xadrez, tem que ter um tabuleiro */
+	private Board board;
+
+	/* Declaro o tamanho do meu tabuleiro */
+	public ChessMatch() {
+		board = new Board(8, 8);
+	}
+
+	/*
+	 * Para retornarmos uma peça específica, não queremos que o programa tenha visão
+	 * da peça em si, apenas da peça que está no tabuleiro. Pra isso, nós
+	 * percorremos todo o tabuleiro e retornamos a peça, fazendo um casting para
+	 * CHESSPIECE
+	 */
+	public ChessPiece[][] getPieces() {
+		/*Declara uma matriz temporária*/
+		ChessPiece[][] temp = new ChessPiece[board.getRows()][board.getColumns()];
+
+		for (int i = 0; i < board.getRows(); i++) {
+			for (int j = 0; j < board.getColumns(); j++) {
+				temp[i][j] = (ChessPiece) board.piece(i, j);
+			}
+		}
+		return temp;
+	}
+}

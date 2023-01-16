@@ -47,15 +47,32 @@ public class Board {
 	public void placePiece(Piece piece, Position position) {
 		/*Verifica se já existe uma peça no tabuleiro*/
 		if (thereIsAPiece(position))
-			throw new BoardException("Já existe uma peça nessa posição " + position);
+			throw new BoardException("Ja existe uma peça nessa posicao " + position);
 		/*Passa a posição da coluna e da linha em que a peça vai ficar*/
 		pieces[position.getRow()][position.getColumn()] = piece;
 		/*Informa que a peça agora tem uma posição*/
 		piece.position = position;
 	}
 	
+	public Piece removePiece (Position position) {
+		if(!positionExists(position))
+			throw new BoardException("Nao existe essa posicao no tabuleiro !");
+		
+		if (piece(position) == null)
+			return null;
+		
+		/*Armazeno a peça na variável aux*/
+		Piece aux = piece(position);
+		/*Informo que a posição para a qual aux tá apontando será nulla*/
+		aux.position = null;
+		/*Declaro que na minha matriz, a posição informada passa a ter o valor nulo*/
+		pieces[position.getRow()][position.getColumn()] = null;
+		/*Retorno a peça que foi removida*/
+		return aux;
+	}
+	
 	/*Verifica se existe uma posição informando a linha e a coluna*/
-	public boolean positionExists (int row, int column) {
+	private boolean positionExists (int row, int column) {
 		return row >= 0 && row < rows && column >= 0 && column < columns;
 	}
 	

@@ -37,7 +37,7 @@ public class ChessMatch {
 	
 	/*Responsável por iniciar uma partida de xadrez*/
 	private void initialSetup () {
-		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
-		board.placePiece(new King(board, Color.BLACK), new Position(3, 4));
+		board.placePiece(new Rook(board, Color.WHITE), new Position(7, 1));
+		board.placePiece(new King(board, Color.BLACK), new Position(5, 1));
 	}
 }

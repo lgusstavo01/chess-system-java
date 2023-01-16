@@ -1,15 +1,20 @@
 package chess;
 
 import boardgame.Board;
+import boardgame.Position;
+import chess.pieces.King;
+import chess.pieces.Rook;
 
 public class ChessMatch {
 
 	/* Uma partida de xadrez, tem que ter um tabuleiro */
 	private Board board;
 
-	/* Declaro o tamanho do meu tabuleiro */
+	/* Declaro o tamanho do meu tabuleiro 
+	 * e declaro o tabuleiro inicial*/
 	public ChessMatch() {
 		board = new Board(8, 8);
+		initialSetup();
 	}
 
 	/*
@@ -28,5 +33,11 @@ public class ChessMatch {
 			}
 		}
 		return temp;
+	}
+	
+	/*Responsável por iniciar uma partida de xadrez*/
+	private void initialSetup () {
+		board.placePiece(new Rook(board, Color.WHITE), new Position(2, 1));
+		board.placePiece(new King(board, Color.BLACK), new Position(3, 4));
 	}
 }

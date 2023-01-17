@@ -1,6 +1,6 @@
 package boardgame;
 
-public class Piece {
+public abstract class Piece {
 
 	/*
 	 * O protected faz com que apenas classes e subclasses do mesmo pacote tenham
@@ -27,5 +27,28 @@ public class Piece {
 	 */
 	protected Board getBoard() {
 		return board;
+	}
+
+	/* Metodo abstrato para usar nas subclasses */
+	public abstract boolean[][] possibleMovies();
+
+	/* Verifica se existe movimento possivel para a peca */
+	public boolean possibleMove(Position position) {
+		return possibleMovies()[position.getRow()][position.getColumn()];
+	}
+
+	/*
+	 * Percorre a matris de possibleMovies e verifica se existe algum movimento
+	 * possivel e a depender, retorna falso ou verdadeiro
+	 */
+	public boolean isThereAnyPossibleMove() {
+		boolean[][] mat = possibleMovies();
+		for (int i = 0; i < mat.length; i++) {
+			for (int j = 0; j < mat.length; j++) {
+				if (mat[i][j])
+					return true;
+			}
+		}
+		return false;
 	}
 }

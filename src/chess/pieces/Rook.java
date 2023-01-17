@@ -15,4 +15,11 @@ public class Rook extends ChessPiece {
 		return "R";
 	}
 
+	@Override
+	public boolean[][] possibleMovies() {
+		/*Declaro uma matriz com a mesma dimensao do tabuleiro*/
+		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+		return mat;
+	}
+
 }

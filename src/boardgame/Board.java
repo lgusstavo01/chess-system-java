@@ -9,7 +9,7 @@ public class Board {
 
 	public Board(Integer rows, Integer columns) {
 		if (rows < 1 || columns < 1)
-			throw new BoardException("Erro ao criar o tabuleiro: É necessário pelo menos 1 linha e 1 coluna");
+			throw new BoardException("Erro ao criar o tabuleiro: E necessario pelo menos 1 linha e 1 coluna");
 		this.rows = rows;
 		this.columns = columns;
 		pieces = new Piece[rows][columns];
@@ -29,7 +29,7 @@ public class Board {
 	 */
 	public Piece piece(int row, int column) {
 		if (!positionExists(row, column))
-			throw new BoardException("Não existe essa posição no tabuleiro !");
+			throw new BoardException("Nao existe essa posicao no tabuleiro !");
 		return pieces[row][column];
 	}
 
@@ -39,7 +39,7 @@ public class Board {
 	 */
 	public Piece piece(Position position) {
 		if (!positionExists(position))
-			throw new BoardException("Não existe essa posição no tabuleiro !");
+			throw new BoardException("Nao existe essa posicao no tabuleiro !");
 		return pieces[position.getRow()][position.getColumn()];
 	}
 	
@@ -84,7 +84,7 @@ public class Board {
 	/*Verifica se existe uma peça em uma determinada posição*/
 	public boolean thereIsAPiece (Position position) {
 		if (!positionExists(position))
-			throw new BoardException("Não existe essa posição no tabuleiro !");
+			throw new BoardException("Nao existe essa posicao no tabuleiro !");
 		return piece(position) != null;
 	}
 }

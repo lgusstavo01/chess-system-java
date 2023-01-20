@@ -1,5 +1,8 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
@@ -14,13 +17,18 @@ public class ChessMatch {
 	private int turn;
 	/* Variavel para informar qual o jogador vai jogar */
 	private Color currentPlayer;
-
+	
+	/* Lista das pecas que ainda estao no tabuleiro*/
+	List<Piece> piecesOnTheBoard = new ArrayList<>();
+	/* Lista das pecas que ja foram capturadas*/
+	List<Piece> capturedPieces = new ArrayList<>();
+	
 	/* Declaro o tamanho do meu tabuleiro 
 	 * e declaro o tabuleiro inicial*/
 	public ChessMatch() {
 		board = new Board(8, 8);
 		turn = 1;
-		currentPlayer = Color.WHITE;
+		currentPlayer = Color.BRANCA;
 		initialSetup();
 	}
 	
@@ -84,6 +92,11 @@ public class ChessMatch {
 		Piece pieceCaptured = board.removePiece(target);
 		/*Aloca a peça da posição de origem na posição de destino*/
 		board.placePiece(p, target);
+		/* Verifica se alguma peca foi capturada e realiza a condicao */
+		if (pieceCaptured != null) {
+			capturedPieces.add(pieceCaptured);
+			piecesOnTheBoard.remove(pieceCaptured);
+		}
 		/*Retorna a peça capturada*/
 		return pieceCaptured;
 	}
@@ -109,28 +122,30 @@ public class ChessMatch {
 		/* Incrementa o numero de turno em 1 */
 		turn++;
 		/* Operacao ternaria, responsavel por alternar o jogador */
-		currentPlayer = currentPlayer == Color.WHITE ? Color.BLACK : Color.WHITE;
+		currentPlayer = currentPlayer == Color.BRANCA ? Color.PRETA : Color.BRANCA;
 	}
 	
 	private void placeNewPiece (char column, int row, ChessPiece piece) {
 		board.placePiece(piece, new ChessPosition(column, row).toPosition());
+		/* Adiciona uma peca, na minha lista de pecas que estao no tabuleiro */
+		piecesOnTheBoard.add(piece);
 	}
 	
 	/*Responsável por iniciar uma partida de xadrez*/
 	private void initialSetup () {
-		placeNewPiece('c', 1, new Rook(board, Color.WHITE));
-        placeNewPiece('c', 2, new Rook(board, Color.WHITE));
-        placeNewPiece('d', 2, new Rook(board, Color.WHITE));
-        placeNewPiece('e', 2, new Rook(board, Color.WHITE));
-        placeNewPiece('e', 1, new Rook(board, Color.WHITE));
-        placeNewPiece('d', 1, new King(board, Color.WHITE));
+		placeNewPiece('c', 1, new Rook(board, Color.BRANCA));
+        placeNewPiece('c', 2, new Rook(board, Color.BRANCA));
+        placeNewPiece('d', 2, new Rook(board, Color.BRANCA));
+        placeNewPiece('e', 2, new Rook(board, Color.BRANCA));
+        placeNewPiece('e', 1, new Rook(board, Color.BRANCA));
+        placeNewPiece('d', 1, new King(board, Color.BRANCA));
 
-        placeNewPiece('c', 7, new Rook(board, Color.BLACK));
-        placeNewPiece('c', 8, new Rook(board, Color.BLACK));
-        placeNewPiece('d', 7, new Rook(board, Color.BLACK));
-        placeNewPiece('e', 7, new Rook(board, Color.BLACK));
-        placeNewPiece('e', 8, new Rook(board, Color.BLACK));
-        placeNewPiece('d', 8, new King(board, Color.BLACK));
+        placeNewPiece('c', 7, new Rook(board, Color.PRETA));
+        placeNewPiece('c', 8, new Rook(board, Color.PRETA));
+        placeNewPiece('d', 7, new Rook(board, Color.PRETA));
+        placeNewPiece('e', 7, new Rook(board, Color.PRETA));
+        placeNewPiece('e', 8, new Rook(board, Color.PRETA));
+        placeNewPiece('d', 8, new King(board, Color.PRETA));
 
 	}
 }

@@ -1,7 +1,10 @@
 package application;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import chess.ChessMatch;
 import chess.ChessPiece;
@@ -53,11 +56,13 @@ public class UI {
 	}
 	
 	/* Metodo responsavel por imprimir a partida */
-	public static void printMatch(ChessMatch chessMatch) {
+	public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
 		printBoard(chessMatch.getPieces());
 		System.out.println();
-		System.out.println("Turn: " + chessMatch.getTurn());
-		System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
+		printCapturedPieces(captured);
+		System.out.println();
+		System.out.println("Turno: " + chessMatch.getTurn());
+		System.out.println("Esperando jogador: " + chessMatch.getCurrentPlayer());
 	}
 
 	/* Printo o tabuleiro na tela */
@@ -91,7 +96,7 @@ public class UI {
 		if (piece == null) {
 			System.out.print("-" + ANSI_RESET);
 		} else {
-			if (piece.getColor() == Color.WHITE) {
+			if (piece.getColor() == Color.BRANCA) {
 				System.out.print(ANSI_WHITE + piece + ANSI_RESET);
 			} else {
 				System.out.print(ANSI_YELLOW + piece + ANSI_RESET);
@@ -99,4 +104,45 @@ public class UI {
 		}
 		System.out.print(" ");
 	}
+	
+	private static void printCapturedPieces(List<ChessPiece> captured) {
+		/* Filtrando as pecas capturadas de cor branca */
+		List<ChessPiece> white = captured.stream().filter(x -> x.getColor() == Color.BRANCA).collect(Collectors.toList());
+		/* Filtrando as pecas capturadas de cor preta */
+		List<ChessPiece> black = captured.stream().filter(x -> x.getColor() == Color.PRETA).collect(Collectors.toList());
+	
+		System.out.println("Pecas capturadas: ");
+		System.out.println();
+		System.out.print("Brancas: ");
+		/* Garantir que as pecas impressas terao a cor branca */
+		System.out.print(ANSI_WHITE);
+		/* Macete para imprimir um array no Java */
+		System.out.print(Arrays.toString(white.toArray()));
+		/* Reseta para a cor padrao */
+		System.out.print(ANSI_RESET);
+		System.out.println();
+		System.out.println();
+		/* Garantir que as pecas impressas terao a cor amarela */
+		System.out.print(ANSI_YELLOW);
+		System.out.print("Pretas: ");
+		System.out.print(Arrays.toString(black.toArray()));
+		/* Reseta para a cor padrao */
+		System.out.print(ANSI_RESET);
+		System.out.println();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

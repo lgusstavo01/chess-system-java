@@ -36,6 +36,16 @@ public class ChessMatch {
 		return temp;
 	}
 	
+	/*Responsavel por printar na tela os movimentos possiveis de uma peca.*/
+	public boolean[][] possibleMoves (ChessPosition sourcePosition){
+		/*Converte a posicao de xadrez, para uma posicao de matriz normal*/
+		Position position = sourcePosition.toPosition();
+		/*Valida se existe uma peca na posicao de origem*/
+		validateSourcePosition(position);
+		/*Retorna uma matriz com os possiveis movimentos da peca*/
+		return board.piece(position).possibleMovies();
+	}
+	
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
 			/*Converte as 2 posições para posições de matrizes*/
 			Position source = sourcePosition.toPosition();

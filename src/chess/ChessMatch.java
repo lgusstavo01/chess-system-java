@@ -10,12 +10,26 @@ public class ChessMatch {
 
 	/* Uma partida de xadrez, tem que ter um tabuleiro */
 	private Board board;
+	/* Variavel para informar o turno em que se encontra a partida*/
+	private int turn;
+	/* Variavel para informar qual o jogador vai jogar */
+	private Color currentPlayer;
 
 	/* Declaro o tamanho do meu tabuleiro 
 	 * e declaro o tabuleiro inicial*/
 	public ChessMatch() {
 		board = new Board(8, 8);
+		turn = 1;
+		currentPlayer = Color.WHITE;
 		initialSetup();
+	}
+	
+	public int getTurn() {
+		return turn;
+	}
+	
+	public Color getCurrentPlayer() {
+		return currentPlayer;
 	}
 
 	/*
@@ -46,6 +60,7 @@ public class ChessMatch {
 		return board.piece(position).possibleMovies();
 	}
 	
+	/* Metodo responsavel por fazer uma jogada */
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
 			/*Converte as 2 posições para posições de matrizes*/
 			Position source = sourcePosition.toPosition();
@@ -56,6 +71,8 @@ public class ChessMatch {
 			validateTargetPosition(source, target);
 			/*Será responsável por informar a peça que foi capturada*/
 			Piece capturedPiece = makeMove(source, target);
+			/*Declara que trocou de turno*/
+			nextTurn();
 			/*Tem que fazer um downcast, pois a peça é do tipo Piece*/
 			return (ChessPiece)capturedPiece;
 	}
@@ -75,13 +92,24 @@ public class ChessMatch {
 		if (!board.thereIsAPiece(position))
 			throw new ChessException("Nao existe peca na posicao de origem.");
 		
-		if(!board.piece(position).isThereAnyPossibleMove())
+		if (!board.piece(position).isThereAnyPossibleMove())
 			throw new ChessException("A peca esta presa. Nao existe movimento possivel");
+		
+		if (currentPlayer != ((ChessPiece)board.piece(position)).getColor())
+			throw new ChessException("Existe uma peca na posicao, mas ela eh do adversario.");
 	}
 	
 	private void validateTargetPosition (Position source, Position target) {
 		if(!board.piece(source).possibleMove(target))
 			throw new ChessException("A peca escolhida nao pode se mover para a posicao de destino.");
+	}
+	
+	/* Metodo responsavel por determinar a troca de turno e definir qual o jogador devera jogar */
+	private void nextTurn() {
+		/* Incrementa o numero de turno em 1 */
+		turn++;
+		/* Operacao ternaria, responsavel por alternar o jogador */
+		currentPlayer = currentPlayer == Color.WHITE ? Color.BLACK : Color.WHITE;
 	}
 	
 	private void placeNewPiece (char column, int row, ChessPiece piece) {

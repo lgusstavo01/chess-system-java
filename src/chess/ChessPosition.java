@@ -25,8 +25,9 @@ public class ChessPosition {
 		return new Position(8 - row, column - 'a');
 	}
 	
+	/* Retorna a peca no formato de xadrez */
 	protected static ChessPosition fromPosition (Position position) {
-		return new ChessPosition((char)('a' - position.getColumn()), 8 - position.getRow());
+		return new ChessPosition((char)('a' + position.getColumn()), 8 - position.getRow());
 	}
 	
 	public String toString () {

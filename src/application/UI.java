@@ -1,6 +1,7 @@
 package application;
 
 import java.util.Arrays;
+import java.util.Currency;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -62,12 +63,17 @@ public class UI {
 		printCapturedPieces(captured);
 		System.out.println();
 		System.out.println("Turno: " + chessMatch.getTurn());
-		System.out.println("Esperando jogador: " + chessMatch.getCurrentPlayer());
 		
-		System.out.println();
-		
-		if(chessMatch.getCheck())
-			System.out.println("CHECK!");
+		/* Verifica se a partida nao se encontra em checkMate */
+		if(!chessMatch.getCheckMate()) {
+			System.out.println("Esperando jogador: " + chessMatch.getCurrentPlayer());
+			System.out.println();
+				if(chessMatch.getCheck()) 
+					System.out.println("CHECK!");
+		} else {
+			System.out.println("CHECKMATE !!");
+			System.out.println("Vencedor: " + chessMatch.getCurrentPlayer());
+		}
 	}
 
 	/* Printo o tabuleiro na tela */

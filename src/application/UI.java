@@ -65,6 +65,7 @@ public class UI {
 		System.out.println("Turno: " + chessMatch.getTurn());
 		
 		/* Verifica se a partida nao se encontra em checkMate */
+		
 		if(!chessMatch.getCheckMate()) {
 			System.out.println("Esperando jogador: " + chessMatch.getCurrentPlayer());
 			System.out.println();

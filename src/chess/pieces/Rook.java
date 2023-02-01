@@ -18,6 +18,7 @@ public class Rook extends ChessPiece {
 
 	@Override
 	public boolean[][] possibleMovies() {
+		/* Matriz para auxiliar */
 		boolean[][] mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
 
 		/* Variavel para auxiliar */

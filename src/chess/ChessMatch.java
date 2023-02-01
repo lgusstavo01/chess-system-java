@@ -8,6 +8,7 @@ import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.Bishop;
+import chess.pieces.Horse;
 import chess.pieces.King;
 import chess.pieces.Pawn;
 import chess.pieces.Rook;
@@ -298,6 +299,8 @@ public class ChessMatch {
 		placeNewPiece('h', 2, new Pawn(board, Color.BRANCA));
 		placeNewPiece('c', 1, new Bishop(board, Color.BRANCA));
 		placeNewPiece('f', 1, new Bishop(board, Color.BRANCA));
+		placeNewPiece('b', 1, new Horse(board, Color.BRANCA));
+		placeNewPiece('g', 1, new Horse(board, Color.BRANCA));
 
 		placeNewPiece('a', 8, new Rook(board, Color.PRETA));
 		placeNewPiece('e', 8, new King(board, Color.PRETA));
@@ -312,6 +315,8 @@ public class ChessMatch {
 		placeNewPiece('h', 7, new Pawn(board, Color.PRETA));
 		placeNewPiece('c', 8, new Bishop(board, Color.PRETA));
 		placeNewPiece('f', 8, new Bishop(board, Color.PRETA));
+		placeNewPiece('b', 8, new Horse(board, Color.PRETA));
+		placeNewPiece('g', 8, new Horse(board, Color.PRETA));
 
 	}
 }
